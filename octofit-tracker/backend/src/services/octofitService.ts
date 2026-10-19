@@ -42,6 +42,10 @@ export async function createTeam(input: unknown) {
     !members.every((member) => typeof member === 'string' && Types.ObjectId.isValid(member))
   ) throw invalidInput();
 
+  const uniqueMemberIds = new Set(members.map((member) => new Types.ObjectId(member).toHexString()));
+  if (uniqueMemberIds.size !== members.length) {
+    throw Object.assign(new Error('Duplicate team member IDs are not allowed'), { status: 400 });
+  }
   const existingMembers = await User.countDocuments({ _id: { $in: members } });
   if (existingMembers !== members.length) {
     throw Object.assign(new Error('One or more team members were not found'), { status: 404 });

@@ -30,20 +30,23 @@ OctoFit Tracker is a three-tier application for a school fitness program. The st
 
 Record your plan here before editing code.
 
-- Presentation tier decision:
-- Logic tier decision:
-- Data tier decision:
-- Activity tracking approach:
-- Team management approach:
-- Leaderboard approach:
-- Workout suggestions approach:
+- Presentation tier decision: React pages will display the data fetched through the API client from the logic tier
+- Logic tier decision: REST API layer that provides input validation, business logic and interfaces with the Data tier.
+- Data tier decision: Mongoose models data representing the students and activities being tracked. Seeds default values and representative data without removing records. 
+- Activity tracking approach: Accepts activities from existing users, computes the points and records time. Returns error messages for invalid inputs.
+- Team management approach: CRUD actions for teams. Records team name, members and other related data like mascot.
+- Leaderboard approach: Sums activity points per team and assigns Rank by sorting teams, with the most points first. A rank of 1 is the highest rank, 2 is next highest etc.
+- Workout suggestions approach: Finds the user by email and suggests workouts based on their specified goal or recent activity. Explains the reasoning behind the suggestion. Returns an error for an unknown user. 
 
 ## Test plan
 
 Record the commands you run and what each failure means.
 
-- Data-tier command: `npm run test:data --prefix octofit-tracker/backend`
-- API command: `npm run test:api --prefix octofit-tracker/backend`
-- Frontend command: `npm test --prefix octofit-tracker/frontend`
+- Data-tier command: `npm run test:data --prefix octofit-tracker/backend` 
+  - FAILURE: Validation tests are failing, missing required data
+- API command: `npm run test:api --prefix octofit-tracker/backend` 
+- - FAILURE: 501 errors due to api contract not implemented
+- Frontend command: `npm test --prefix octofit-tracker/frontend
+  - FAILURE:`Implementation pending errors
 - Backend build command: `npm run build --prefix octofit-tracker/backend`
 - Frontend build command: `npm run build --prefix octofit-tracker/frontend`
